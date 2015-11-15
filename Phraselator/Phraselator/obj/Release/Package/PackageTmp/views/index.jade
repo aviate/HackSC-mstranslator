@@ -1,0 +1,41 @@
+﻿extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}  
+
+    input(type='text', value='This is the source sentence.' id='inputField')
+    select(id='fromSelector')
+        option(value='en') English
+        option(value='de') German
+        option(value='nl') Dutch
+        option(value='es') Spanish
+        option(value='hi') Hindi
+    input(type='text', placeholder='This is the translated sentence.' id='outputField')
+    select(id='toSelector')
+        option(value='en') English
+        option(value='de') German
+        option(value='nl') Dutch
+        option(value='es') Spanish
+        option(value='hi') Hindi
+    br
+    button(id='trBtn')
+        value Translate
+
+    script.
+        trBtn.onclick = function() {
+            $.ajax({
+                method: 'post',
+                url: '/translate',
+                data: {
+                    data: JSON.stringify({
+                        text: inputField.value,
+                        from: fromSelector.value,
+                        to: toSelector.value
+                    })
+                },
+                success: function (data) {
+                    outputField.value = data;
+                }
+            });
+        }
