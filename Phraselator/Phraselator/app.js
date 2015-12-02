@@ -23,14 +23,12 @@ app.use(cookieParser());
 
 
 var MsTranslator = require('mstranslator');
-// Second parameter to constructor (true) indicates that
-// the token should be auto-generated.
 
 
 app.post('/translate', function (req, res) {
     var translator = new MsTranslator({
-        client_id: "phraselator",
-        client_secret: "zO1f7WqA6eGuxrchAiKAbZRkNpcp0bsWgHwCpk7WnX4"
+        client_id: "YOUR_ID",
+        client_secret: "YOUR_SECRET"
     }, true);
     
     var params = JSON.parse(req.body.data);
